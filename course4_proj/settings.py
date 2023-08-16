@@ -42,6 +42,8 @@ class Dev(Configuration):
       'django.contrib.messages',
       'django.contrib.staticfiles',
       'gh',
+      'movies',
+      'django_celery_results'
   ]
 
   MIDDLEWARE = [
@@ -153,12 +155,15 @@ class Dev(Configuration):
 
   ALLOWED_HOSTS = values.ListValue(["localhost", "0.0.0.0", ".codio.io", os.environ.get('CODIO_HOSTNAME') + '-8000.codio.io'])
   X_FRAME_OPTIONS = "ALLOW-FROM " + os.environ.get("CODIO_HOSTNAME") + "-8000.codio.io"
-  CSRF_COOKIE_SAMESITE = None
-  CSRF_TRUSTED_ORIGINS = [os.environ.get("CODIO_HOSTNAME") + "-8000.codio.io"]
-  CSRF_COOKIE_SECURE = True
-  SESSION_COOKIE_SECURE = True
+#   CSRF_COOKIE_SAMESITE = None
+#   CSRF_TRUSTED_ORIGINS = [os.environ.get("CODIO_HOSTNAME") + "-8000.codio.io"]
+#   CSRF_TRUSTED_ORIGINS = "*"
+#   CSRF_COOKIE_SECURE = False
+#   SESSION_COOKIE_SECURE = False
   CSRF_COOKIE_SAMESITE = "None"
   SESSION_COOKIE_SAMESITE = "None"
   OMDB_KEY = "48a5c3e4"
+  CELERY_RESULT_BACKEND = "django-db"
+  CELERY_BROKER_URL = "redis://localhost:6379/0"
 
 
